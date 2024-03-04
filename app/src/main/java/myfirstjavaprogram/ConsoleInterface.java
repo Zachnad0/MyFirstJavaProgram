@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 public class ConsoleInterface
 {
     private final TicTacToeGame Game;
-    private final char[] Alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+    private final char[] Alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().toCharArray();
 
     public ConsoleInterface(TicTacToeGame game)
     {
@@ -15,40 +15,51 @@ public class ConsoleInterface
 
     public void RenderGame()
     {
-        // TODO setup game char matrix rendering crap
         char[][] gameMatrix = Game.GetGameMatrix();
 
         System.out.println();
         char[][] printMatrix = new char[Game.GAME_EDGE_LENGTH * 2 + 1][Game.GAME_EDGE_LENGTH + 2];
         // First column render letters
-        for (int y = 0; y < Game.GAME_EDGE_LENGTH + 2; y++)
+        for (int y = 0; y < printMatrix[0].length; y++)
             printMatrix[0][y] = y <= 1 ? Game.NO_CHAR : Alphabet[y - 2];
 
         // Render rest of columns
-        for (int x = 0; x < printMatrix.length; x++)
+        int xIndex = 1;
+        for (int x = 1; xIndex <= Game.GAME_EDGE_LENGTH; x++) // For cols
         {
-            for (int y = 0; y < printMatrix[y].length; y++)
+            for (int y = 0; y < printMatrix[y].length; y++) // For rows
             {
-                switch (y)
+                if (x % 2 == 0)
                 {
-                case 0:
-                    if (x % 2 == 1) // TODO fix this -----\/
-                        printMatrix[x][y] = ((Integer) ((x + 2) / 2)).toString().charAt(0);
-                    break;
+                    switch (y)
+                    {
+                    case 0:
+                        printMatrix[x][y] = ((Integer) xIndex).toString().charAt(0);
+                        xIndex++;
+                        break;
 
-                case 1:
-                    printMatrix[x][y] = '-';
-                    break;
+                    case 1:
+                        printMatrix[x][y] = '-';
+                        break;
 
-                default:
-                    printMatrix[x][y] = gameMatrix[(x + 2) / 2][y - 2];
-                    break;
-                }
+                    default:
+                        printMatrix[x][y] = gameMatrix[xIndex - 2][y - 2];
+                        break;
+                    }
+                } else
+                    printMatrix[x][y] = y == 1 ? '-' : Game.NO_CHAR;
             }
         }
 
         String finalOutput = "";
+        for (int y = 0; y < printMatrix[0].length; y++)
+        {
+            for (int x = 0; x < printMatrix.length; x++)
+                finalOutput += printMatrix[x][y];
+            finalOutput += "\n";
+        }
         System.out.println(finalOutput);
+
     }
 
     public String AskToFromConsoleGame(String msg)

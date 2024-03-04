@@ -20,7 +20,8 @@ public class App
         TicTacToePlayerType[] players = TicTacToePlayerType.values();
         boolean currSelPlayer = new Random().nextBoolean();
 
-        System.out.println(String.format("Player %s gets to start first!", players[currSelPlayer ? 0 : 1]));
+        // System.out.println(String.format("Player %s gets to start first!",
+        // players[currSelPlayer ? 0 : 1]));
         try
         {
             Thread.sleep(2);
@@ -37,7 +38,8 @@ public class App
             String turnResponse = currGame._consoleInterface
                     .AskToFromConsoleGame(String.format("Player %s coord?: ", currPlayer));
 
-            // TODO parse response to coords, will be in format "A1" to "B3"
+            // Check validity, then parse input coordinates
+            // TODO implement coord parsing
 
             currSelPlayer = !currSelPlayer;
         } while (!currGame.CheckForWinCondition());
