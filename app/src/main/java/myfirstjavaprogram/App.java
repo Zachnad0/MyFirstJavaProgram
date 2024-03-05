@@ -40,6 +40,11 @@ public class App
 
             // Check validity, then parse input coordinates
             // TODO implement coord parsing
+            Vector2 inputCoord = currGame.ParseCoord(turnResponse);
+            if (inputCoord == null)
+            {
+                // Ask again
+            }
 
             currSelPlayer = !currSelPlayer;
         } while (!currGame.CheckForWinCondition());

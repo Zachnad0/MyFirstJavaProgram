@@ -1,5 +1,6 @@
 package myfirstjavaprogram;
 
+import java.util.*;
 import java.util.HashMap;
 
 public class TicTacToeGame
@@ -48,6 +49,35 @@ public class TicTacToeGame
     {
         // TODO complete CheckForWinCondition
         return false;
+    }
+
+    public Vector2 ParseCoord(String coordStr)
+    {
+        // Check validity of param coordStr
+        Vector2 result = new Vector2(0, 0);
+        Character firstChar = (Character) coordStr.toUpperCase().charAt(0),
+                secondChar = (Character) coordStr.toUpperCase().charAt(1);
+
+        // Convert to Character type (Crappy ahh language (without apache lib))
+        Character[] alphabetCharacters = new Character[_consoleInterface.Alphabet.length];
+        for (int i = 0; i < alphabetCharacters.length; i++)
+            alphabetCharacters[i] = (Character) _consoleInterface.Alphabet[i];
+
+        // First char must be letter, second the number. E.g: A1
+        if (coordStr.length() != 2 || !Arrays.stream(alphabetCharacters).anyMatch(c -> c == firstChar))
+            return null;
+        try
+        {
+            result.Y = Integer.parseInt(secondChar.toString());
+        } catch (Exception e)
+        {
+            return null;
+        }
+
+        // Find index of letter in alphabet that is firstChar
+        // TODO continue here later
+
+        return null;
     }
 
     public char[][] GetGameMatrix()

@@ -5,8 +5,8 @@ import java.nio.charset.StandardCharsets;
 
 public class ConsoleInterface
 {
+    public final char[] Alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().toCharArray();
     private final TicTacToeGame Game;
-    private final char[] Alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().toCharArray();
 
     public ConsoleInterface(TicTacToeGame game)
     {
