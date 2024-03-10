@@ -1,5 +1,6 @@
 package myfirstjavaprogram;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.HashMap;
 
@@ -75,9 +76,9 @@ public class TicTacToeGame
         }
 
         // Find index of letter in alphabet that is firstChar
-        // TODO continue here later
+        result.X = Arrays.binarySearch(alphabetCharacters, firstChar);
 
-        return null;
+        return result;
     }
 
     public char[][] GetGameMatrix()
